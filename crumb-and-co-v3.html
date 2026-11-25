@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Crumb &amp; Co — Small bakery, big crumb</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --green:#1B3B2B;
+    --pink:#F6D8DF;
+    --white:#FFFFFF;
+    --sans:"Poppins",system-ui,-apple-system,"Segoe UI",sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:var(--sans);font-weight:300;color:var(--green);background:var(--white);font-size:16px;line-height:1.75}
+  a{color:inherit}
+  b,strong{font-weight:700}
+  .wrap{max-width:860px;margin:0 auto;padding:0 24px}
+
+  .notice{text-align:center;font-style:italic;font-size:13px;padding:10px 16px;background:var(--pink)}
+
+  header{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;max-width:1180px;margin:0 auto;padding:26px 24px}
+  header nav{display:flex;gap:18px;flex-wrap:wrap;font-size:14px;font-weight:400}
+  header nav a{text-decoration:none}
+  header nav a:hover{text-decoration:underline;text-underline-offset:5px}
+  .logo{font-weight:700;font-size:30px;letter-spacing:.02em;text-decoration:none;text-align:center;line-height:1}
+  .logo span{display:block;font-weight:300;font-size:12px;letter-spacing:.2em;margin-top:6px}
+  header .cta{justify-self:end}
+
+  .pill{display:inline-block;background:var(--green);color:var(--white);text-decoration:none;font-weight:600;font-size:14px;padding:10px 20px;border-radius:999px;transition:background .15s,color .15s}
+  .pill:hover{background:var(--pink);color:var(--green)}
+  .pill.big{font-size:16px;padding:14px 28px}
+
+  .intro{text-align:center;max-width:420px;margin:56px auto 0}
+  .intro h1{font-weight:700;font-size:clamp(30px,5vw,42px);line-height:1.15;margin-bottom:18px}
+  .intro p + p{margin-top:16px}
+  .intro .pill{margin-top:26px}
+
+  /* little round photos in place of hand-drawn illustrations */
+  .dot{width:74px;height:74px;border-radius:50%;overflow:hidden;background:var(--pink);flex:none}
+  .dot img{width:100%;height:100%;object-fit:cover;display:block}
+  .dots{display:flex;justify-content:center;gap:14px;margin:46px 0 0}
+  .dots .dot:nth-child(2){transform:translateY(-12px);background:var(--green)}
+
+  h2.menu-title{text-align:center;font-weight:600;font-size:20px;margin:88px 0 46px}
+  h2.menu-title span{background:var(--pink);padding:2px 12px;border-radius:999px}
+
+  .menu{display:grid;grid-template-columns:1fr 1fr;gap:58px 70px}
+  .menu h3{font-weight:700;font-size:16px;text-transform:lowercase}
+  .menu .when{font-size:14px;font-style:italic;margin-bottom:12px;opacity:.8}
+  .menu ul{list-style:none}
+  .menu li{margin-bottom:2px}
+  .menu .row{display:flex;align-items:flex-start;gap:16px}
+
+  .fine{text-align:center;font-size:13px;font-style:italic;margin-top:40px}
+
+  /* Cakes */
+  .cakes{margin-top:96px;background:var(--pink);border-radius:28px;padding:48px 44px;display:grid;grid-template-columns:auto 1fr;gap:34px;align-items:start}
+  .cakes .dot{width:132px;height:132px;background:var(--green)}
+  .cakes h2{font-weight:700;font-size:24px;line-height:1.25;margin-bottom:10px}
+  .cakes ol{list-style:none;margin:20px 0 26px;counter-reset:r}
+  .cakes li{counter-increment:r;padding-left:38px;position:relative;margin-bottom:8px}
+  .cakes li::before{content:counter(r);position:absolute;left:0;top:2px;width:24px;height:24px;border-radius:50%;background:var(--green);color:var(--white);font-size:12px;font-weight:600;display:grid;place-items:center}
+
+  /* Hours + visit */
+  .visit{display:grid;grid-template-columns:1fr 1fr;gap:58px 70px;margin-top:96px}
+  .visit h3{font-weight:700;font-size:16px}
+  .visit .when{font-size:14px;font-style:italic;margin-bottom:12px;opacity:.8}
+  .hours li{list-style:none;display:flex;justify-content:space-between;border-bottom:1px dashed rgba(27,59,43,.3);padding:4px 0}
+  .hours li.sun{background:var(--pink);border-radius:8px;padding:4px 10px;margin:0 -10px;border:none}
+  .visit p + p{margin-top:12px}
+  .visit .pill{margin-top:16px}
+
+  .about{text-align:center;max-width:460px;margin:110px auto 0}
+  .about h2{font-weight:600;font-size:20px;margin-bottom:12px}
+
+  footer{margin-top:110px;border-top:1px solid rgba(27,59,43,.15);padding:40px 24px 50px;text-align:center;font-size:14px}
+  footer .logo{display:inline-block;font-size:22px;margin-bottom:12px}
+  footer .links{display:flex;justify-content:center;gap:22px;flex-wrap:wrap;margin-bottom:16px;font-weight:400}
+  footer small{display:block;opacity:.65;font-size:12px}
+
+  @media (max-width:760px){
+    header{grid-template-columns:1fr;justify-items:center;gap:14px}
+    header nav{justify-content:center}
+    header .cta{justify-self:center}
+    header nav:first-child{order:2}
+    .menu,.visit{grid-template-columns:1fr;gap:42px}
+    .cakes{grid-template-columns:1fr;padding:34px 24px}
+    .cakes .dot{width:96px;height:96px}
+  }
+</style>
+</head>
+<body>
+
+<div class="notice">Yes, we’re open on Sunday: 08:00 – 13:00. Mondays we’re closed.</div>
+
+<header>
+  <nav>
+    <a href="#menu">Menu</a>
+    <a href="#cakes">Cakes</a>
+    <a href="#visit">Hours</a>
+    <a href="#about">About</a>
+  </nav>
+  <a class="logo" href="#top">CRUMB &amp; CO<span>UTRECHT</span></a>
+  <div class="cta"><a class="pill" href="mailto:hello@crumbandco.example?subject=Cake%20request">Your cake, our oven</a></div>
+</header>
+
+<main id="top" class="wrap">
+  <section class="intro">
+    <h1>Small bakery, big crumb.</h1>
+    <p>Fresh from the oven, every morning.</p>
+    <p>Sourdough is our thing. Plus pastries, coffee, and birthday cakes made to order.</p>
+    <p>Pop by and see what’s on the counter today.</p>
+  </section>
+
+  <div class="dots" aria-hidden="true">
+    <div class="dot"><img src="https://images.unsplash.com/photo-1590301157172-7ba48dd1c2b2?auto=format&fit=crop&w=200&h=200&q=70" alt="" onerror="this.style.display='none'"></div>
+    <div class="dot"><img src="https://images.unsplash.com/photo-1764281469526-e1c378515e6f?auto=format&fit=crop&w=200&h=200&q=70" alt="" onerror="this.style.display='none'"></div>
+    <div class="dot"><img src="https://images.unsplash.com/photo-1530610476181-d83430b64dcd?auto=format&fit=crop&w=200&h=200&q=70" alt="" onerror="this.style.display='none'"></div>
+  </div>
+
+  <h2 class="menu-title" id="menu"><span>crumb &amp; co menu</span></h2>
+
+  <div class="menu">
+    <div>
+      <h3>bread</h3>
+      <p class="when">fresh every morning</p>
+      <ul>
+        <li>sourdough loaf <b>€6.50</b></li>
+        <li>seeded rye loaf <b>€6.00</b></li>
+      </ul>
+    </div>
+    <div>
+      <h3>pastries</h3>
+      <p class="when">until sold out (the knots go fast)</p>
+      <ul>
+        <li>cinnamon knot <b>€3.75</b></li>
+        <li>almond croissant <b>€3.50</b></li>
+        <li>cardamom bun <b>€3.25</b></li>
+      </ul>
+    </div>
+    <div>
+      <h3>cakes</h3>
+      <p class="when">to order, 3 days notice</p>
+      <ul>
+        <li>birthday cake, 6–8 people, from <b>€38</b></li>
+        <li>fancier designs cost a bit more</li>
+      </ul>
+    </div>
+    <div>
+      <h3>drinks</h3>
+      <p class="when">hot</p>
+      <ul>
+        <li>coffee <b>€3.00</b></li>
+      </ul>
+    </div>
+  </div>
+  <p class="fine">Prices can change.</p>
+
+  <section class="cakes" id="cakes">
+    <div class="dot"><img src="https://images.unsplash.com/photo-1621303837174-89787a7d4729?auto=format&fit=crop&w=300&h=300&q=70" alt="Pink and white cake" loading="lazy" onerror="this.style.display='none'"></div>
+    <div>
+      <h2>Need a cake? You can order one by email.</h2>
+      <p>Tell us the date, how many people, and your idea. Here’s how it works:</p>
+      <ol>
+        <li>Email us at least <b>3 days</b> before you need it.</li>
+        <li><b>Pick-up only.</b> We don’t deliver.</li>
+        <li>You <b>pay when you pick it up</b>, cash or card.</li>
+      </ol>
+      <a class="pill big" href="mailto:hello@crumbandco.example?subject=Cake%20request">Your cake, our oven</a>
+    </div>
+  </section>
+
+  <section class="visit" id="visit">
+    <div>
+      <h3>opening hours</h3>
+      <p class="when">come early for the good stuff</p>
+      <ul class="hours">
+        <li><span>monday</span><b>closed</b></li>
+        <li><span>tuesday – friday</span><b>07:00 – 17:00</b></li>
+        <li><span>saturday</span><b>07:00 – 15:00</b></li>
+        <li class="sun"><span>sunday</span><b>08:00 – 13:00</b></li>
+      </ul>
+    </div>
+    <div>
+      <h3>find us</h3>
+      <p class="when">a little bit hidden</p>
+      <p><b>Voorbeeldstraat 12</b><br>3511 AB Utrecht</p>
+      <p>We’re right next to the bike shop. Parking is tricky, so come by bike if you can.</p>
+      <a class="pill" href="https://www.google.com/maps/search/?api=1&query=Voorbeeldstraat+12+3511+AB+Utrecht" target="_blank" rel="noopener">Open in maps</a>
+    </div>
+  </section>
+
+  <section class="about" id="about">
+    <h2>about us</h2>
+    <p>Sanne opened Crumb &amp; Co in 2019. We bake sourdough, pastries and cakes fresh every morning. Our sourdough starter is called Gerrit. He’s five, and he does most of the work.</p>
+  </section>
+</main>
+
+<footer>
+  <a class="logo" href="#top">CRUMB &amp; CO</a>
+  <div class="links">
+    <a href="mailto:hello@crumbandco.example">hello@crumbandco.example</a>
+    <a href="https://www.instagram.com/crumbandco.utrecht" target="_blank" rel="noopener">@crumbandco.utrecht</a>
+    <a href="tel:+31305550142">030 555 0142</a>
+  </div>
+  <small>Crumb &amp; Co is a fictional business made for a practice exercise.</small>
+</footer>
+
+</body>
+</html>
